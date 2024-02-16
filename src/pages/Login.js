@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom'
 import InputPassword from "../components/InputPassword"
 import UsersRepository from "../api/users"
 import { useAuth } from "../context/login"
+import { useToast } from "../context/toast"
 
 function Login() {
   const navigate = useNavigate();
   const { handleIsLogin } = useAuth()
+  const { openToast } = useToast()
 
   const [user, setUser] = useState({ username: '', password: '' })
   const handleInput = (inputtedValue) => {
@@ -19,14 +21,15 @@ function Login() {
   const handleLogin = async () => {
     try {
       const { username, password } = user;
-      const { data } = await UsersRepository.getUser({ username })
+      const { data } = await UsersRepository.getUser({ username, password })
 
-      if (password === data.password) {
+      if (data.length === 1) {
         handleIsLogin()
         navigate('/')
-      }
+        openToast('Logged in')
+      } else throw new Error(`User ${!data.length ? 'not found' : 'credential invalid'}`)
     } catch (error) {
-      console.log(error);
+      openToast(error.message, 'error')
     }
   }
   return (

@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { Routes as Router, Route, Navigate, Outlet } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Routes as Router, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './context/login'
 import Login from './pages/Login'
 import Layout from './pages/Layout'
@@ -18,7 +18,7 @@ const GuestRoutes = () => {
   const { isLoggedIn } = useAuth()
 
   if (isLoggedIn) return <Navigate to='/' replace />
-  return <Login />
+  return <><Login /></>
 }
 
 const Routes = () => {

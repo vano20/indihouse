@@ -2,8 +2,10 @@ import api from "./axios"
 
 const resource = '/users'
 
-export default {
-    getUser({ username }) {
-        return api.get(`${resource}/${username}`)
+const UserRepository = {
+    getUser({ username, password }) {
+        return api.get(`${resource}?username=${username}&password=${password}`)
     },
 }
+
+export default UserRepository
