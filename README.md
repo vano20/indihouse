@@ -11,7 +11,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 `npm install`
 
 ### Install json-server
-`npm instal -g json-server`
+`npm install -g json-server`
 
 ### Serve the Apps
 `npm start`
